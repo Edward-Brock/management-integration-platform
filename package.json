@@ -1,7 +1,7 @@
 {
   "name": "management-integration-platform",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "MIP 将多种功能进行集合，达到一处使用多端融合",
   "author": "Edward Brock",
   "private": true,
   "license": "AGPL-3.0",
@@ -21,6 +21,7 @@
     "pinia": "^2.1.7",
     "vite-plugin-vuetify": "^2.0.3",
     "vue": "^3.4.21",
+    "vue-i18n": "9",
     "vue-router": "^4.3.0",
     "vuetify": "^3.6.7"
   },
