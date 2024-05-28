@@ -10,6 +10,14 @@ export default {
     username: '用户名',
     password: '密码'
   },
+  validation: {
+    usernameRequired: '需要用户名',
+    usernameLengthMin: '用户名需大于 4 个字符',
+    usernameLengthMax: '用户名需小于 20 个字符',
+    passwordRequired: '需要密码',
+    passwordLengthMin: '密码需大于 6 个字符',
+    passwordLengthMax: '密码需小于 36 个字符'
+  },
   user: {
     register: '注册',
     signIn: '登录',

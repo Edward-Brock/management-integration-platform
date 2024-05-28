@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
-import { getOptionsList } from '@/apis'
+import { getOptionsList } from '@/apis/options'
 import { onMounted, reactive } from 'vue'
 
 interface Option {

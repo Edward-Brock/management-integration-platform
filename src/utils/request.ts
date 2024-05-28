@@ -11,9 +11,13 @@ const instance = axios.create({
 // request 拦截器
 instance.interceptors.request.use(
   (config) => {
-    const headers = config.headers || {}
-    headers['Authorization'] = 'Bearer ' + localStorage.getItem('token')
-    config.headers = headers
+    console.log(config)
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token
+    } else {
+      console.log('No token found')
+    }
     return config
   },
   (err) => Promise.reject(err)

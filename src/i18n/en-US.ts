@@ -10,6 +10,14 @@ export default {
     username: 'Username',
     password: 'Password'
   },
+  validation: {
+    usernameRequired: 'Username is required',
+    usernameLengthMin: 'Username must be more than 4 characters',
+    usernameLengthMax: 'Username must be less than 20 characters',
+    passwordRequired: 'Password is required',
+    passwordLengthMin: 'Password must be more than 6 characters',
+    passwordLengthMax: 'Password must be less than 36 characters'
+  },
   user: {
     register: 'Register',
     signIn: 'Login',
