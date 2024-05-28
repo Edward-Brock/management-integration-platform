@@ -6,7 +6,7 @@ import BaseHeader from '@/components/Header/BaseHeader.vue'
 <template>
   <v-app>
     <!-- Header -->
-    <v-app-bar class="px-6" style="user-select: none" :elevation="0" height="48">
+    <v-app-bar class="px-4" style="user-select: none" :elevation="0" height="48">
       <BaseHeader />
     </v-app-bar>
     <!-- main -->

@@ -1,6 +1,6 @@
 {
   "name": "management-integration-platform",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "MIP 将多种功能进行集合，达到一处使用多端融合",
   "author": "Edward Brock",
   "private": true,
@@ -26,6 +26,7 @@
     "vuetify": "^3.6.7"
   },
   "devDependencies": {
+    "@mdi/font": "^7.4.47",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/jsdom": "^21.1.6",

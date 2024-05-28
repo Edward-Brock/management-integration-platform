@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main>
+  <main class="px-4">
     <h1>HomeView</h1>
   </main>
 </template>
