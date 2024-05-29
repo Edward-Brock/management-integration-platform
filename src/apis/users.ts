@@ -8,3 +8,7 @@ interface Login {
 export function postUserLogin(data: Login) {
   return request('POST', 'auth/login', { data })
 }
+
+export function getUserProfile() {
+  return request('GET', 'auth/profile')
+}

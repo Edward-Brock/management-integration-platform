@@ -10,6 +10,7 @@ export const errorCodeJudgment = (status: number | string): string => {
     case 401:
       message = 'TOKEN 过期'
       console.log('TOKEN 过期')
+      router.push('/login')
       break
     case 403:
       message = '拒绝访问'
@@ -53,5 +54,6 @@ export const errorCodeJudgment = (status: number | string): string => {
   if (!window.navigator.onLine) {
     message = '网络出现问题，请重新连接'
   }
+
   return message
 }

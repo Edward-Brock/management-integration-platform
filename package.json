@@ -1,6 +1,6 @@
 {
   "name": "management-integration-platform",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "MIP 将多种功能进行集合，达到一处使用多端融合",
   "author": "Edward Brock",
   "private": true,
@@ -11,7 +11,7 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "vite build",
+    "build-only": "vite build --mode production",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { postUserLogin } from '@/apis/users'
+import { useUserStore } from '@/stores/user'
+import router from '@/router'
 
 const { t } = useI18n()
 
@@ -32,19 +33,15 @@ async function validate() {
   const { valid } = await form.value.validate()
 
   if (valid) {
-    try {
-      const response = await postUserLogin(userInfo)
-      console.log('Login successful:', response)
-    } catch (error) {
-      console.error('Login failed:', error)
-    }
+    await useUserStore().login(userInfo)
+    router.push('/home')
   }
 }
 </script>
 
 <template>
   <v-sheet class="h-100 mx-auto d-flex flex-column justify-center align-center">
-    <h2 class="mb-8">Sign in to your account</h2>
+    <h2 class="mb-8">{{ $t('login.sign_in_to_your_account') }}</h2>
     <v-form ref="form">
       <v-text-field
         v-model="userInfo.username"
@@ -71,9 +68,9 @@ async function validate() {
       ></v-text-field>
 
       <div class="d-flex flex-column">
-        <v-btn class="mt-4" variant="tonal" size="large" block @click="validate">{{
-          $t('user.signIn')
-        }}</v-btn>
+        <v-btn class="mt-4" variant="tonal" size="large" block @click="validate"
+          >{{ $t('user.signIn') }}
+        </v-btn>
       </div>
     </v-form>
   </v-sheet>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { getOptionsList } from '@/apis/options'
 import { onMounted, reactive } from 'vue'
+import router from '@/router'
+import { useUserStore } from '@/stores/user'
 
 interface Option {
   name: string
@@ -38,12 +40,19 @@ onMounted(async () => {
     <div>
       <v-img :width="46" aspect-ratio="16/9" cover :src="service.logo"></v-img>
     </div>
-    <div>
-      <v-col cols="auto">
-        <v-btn append-icon="mdi-login">
-          {{ $t('user.signIn') }}
-        </v-btn>
-      </v-col>
+    <!-- 通过 Pinia 中的 isLogin 登录标记判断当前登录状态，如果为 False 则显示登录按钮 -->
+    <div v-if="!useUserStore().isLogin">
+      <div @click="router.push('/login')">
+        <v-col cols="auto">
+          <v-btn append-icon="mdi-login">
+            {{ $t('user.signIn') }}
+          </v-btn>
+        </v-col>
+      </div>
+    </div>
+    <!-- isLogin 登陆标记为 True 则显示当前用户头像 -->
+    <div v-else>
+      <v-avatar color="surface-variant"></v-avatar>
     </div>
   </div>
 </template>
