@@ -9,6 +9,7 @@ import vuetify from 'vite-plugin-vuetify'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
+
   return {
     plugins: [
       vue(),
@@ -29,7 +30,6 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: env.VITE_APP_BASE_URL,
           changeOrigin: true,
-          secure: false,
           ws: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }

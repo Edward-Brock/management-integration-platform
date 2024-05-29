@@ -5,6 +5,6 @@ interface Login {
   password: string
 }
 
-export function postUserLogin(params: Login) {
-  return request('POST', 'auth/login', { data: params })
+export function postUserLogin(data: Login) {
+  return request('POST', 'auth/login', { data })
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { postUserLogin } from '@/apis/users'
 
@@ -7,8 +7,10 @@ const { t } = useI18n()
 
 const form = ref()
 
-const username = ref('')
-const password = ref('')
+const userInfo = reactive({
+  username: '',
+  password: ''
+})
 const passwordInputShow = ref(false)
 
 /**
@@ -30,18 +32,22 @@ async function validate() {
   const { valid } = await form.value.validate()
 
   if (valid) {
-    await postUserLogin({ username: username.value, password: password.value }).then((res: any) => {
-      console.log(res)
-    })
+    try {
+      const response = await postUserLogin(userInfo)
+      console.log('Login successful:', response)
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
   }
 }
 </script>
 
 <template>
-  <v-sheet class="h-100 mx-auto d-flex justify-center align-center">
+  <v-sheet class="h-100 mx-auto d-flex flex-column justify-center align-center">
+    <h2 class="mb-8">Sign in to your account</h2>
     <v-form ref="form">
       <v-text-field
-        v-model="username"
+        v-model="userInfo.username"
         :rules="UsernameRules"
         :label="$t('login.username')"
         prepend-inner-icon="mdi-account"
@@ -52,7 +58,7 @@ async function validate() {
 
       <v-text-field
         class="mt-4"
-        v-model="password"
+        v-model="userInfo.password"
         :append-inner-icon="passwordInputShow ? 'mdi-eye' : 'mdi-eye-off'"
         :type="passwordInputShow ? 'text' : 'password'"
         :rules="PasswordRules"

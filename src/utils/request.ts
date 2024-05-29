@@ -1,23 +1,21 @@
 import axios from 'axios'
+import { errorCodeJudgment } from '@/utils/status'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 50000,
-  headers: {
-    'Content-Type': 'application/json;charset=UTF-8;'
-  }
+  withCredentials: true
 })
 
 // request 拦截器
 instance.interceptors.request.use(
   (config) => {
-    console.log(config)
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token
-    } else {
-      console.log('No token found')
-    }
+    // const token = localStorage.getItem('token')
+    // if (token) {
+    //   config.headers['Authorization'] = 'Bearer ' + token
+    // } else {
+    //   console.log('No token found')
+    // }
     return config
   },
   (err) => Promise.reject(err)
@@ -31,31 +29,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      switch (error.response.status) {
-        case 400:
-          console.log('异常错误')
-          break
-        case 401:
-          console.log('TOKEN 过期')
-          break
-        case 403:
-          console.log('拒绝访问')
-          break
-        case 404:
-          console.log('请求地址错误')
-          // go to 404 page
-          break
-        case 500:
-          console.log('服务器错误')
-          // go to 500 page
-          break
-        default:
-          console.log(error.message)
-      }
-    }
-    if (!window.navigator.onLine) {
-      alert('网络出现问题，请重新连接')
-      return
+      errorCodeJudgment(error.response.status)
     }
     return Promise.reject(error)
   }
