@@ -34,7 +34,7 @@ async function validate() {
 
   if (valid) {
     await useUserStore().login(userInfo)
-    router.push('/home')
+    router.push('/')
   }
 }
 </script>

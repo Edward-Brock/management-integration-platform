@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getOptionsList } from '@/apis/options'
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import router from '@/router'
 import { useUserStore } from '@/stores/user'
 
@@ -15,6 +15,21 @@ const service = reactive({
   name: '',
   logo: ''
 })
+
+interface UserInfo {
+  id: number
+  name: string
+  username: string
+  avatar: string
+  email: string
+}
+
+const userInfo = ref({} as UserInfo)
+
+function logout() {
+  const user = useUserStore()
+  user.logout()
+}
 
 /**
  * 根据数组中的 name 值获取对象的 value
@@ -32,6 +47,8 @@ onMounted(async () => {
   })
   service.name = getValueByName(service.info, 'service_name_simple') || ''
   service.logo = getValueByName(service.info, 'service_logo') || ''
+
+  userInfo.value = useUserStore().authInfo
 })
 </script>
 
@@ -52,7 +69,25 @@ onMounted(async () => {
     </div>
     <!-- isLogin 登陆标记为 True 则显示当前用户头像 -->
     <div v-else>
-      <v-avatar color="surface-variant"></v-avatar>
+      <v-menu min-width="250px" rounded>
+        <template v-slot:activator="{ props }">
+          <v-btn size="36" icon v-bind="props" :ripple="false">
+            <v-avatar size="36" :image="userInfo?.avatar"></v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-text elevation="2">
+            <div class="mx-auto text-center mr-4">
+              <v-avatar size="36" :image="userInfo?.avatar"></v-avatar>
+              <div class="mt-2">{{ userInfo.username }}</div>
+              <v-divider class="my-3"></v-divider>
+              <v-btn variant="plain"> {{ $t('user.profile') }} </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn variant="plain" @click="logout"> {{ $t('user.signOut') }} </v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-menu>
     </div>
   </div>
 </template>

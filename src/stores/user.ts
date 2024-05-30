@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { getUserProfile, postUserLogin } from '@/apis/users'
+import router from '@/router'
 
 interface UserInfo {
   username: string
@@ -36,9 +37,20 @@ export const useUserStore = defineStore(
       isLogin.value = false
       tokenInfo.value = ''
       authInfo.value = ''
+      router.push('/')
     }
 
-    return { isLogin, tokenInfo, authInfo, login, logout }
+    // 检查 Token 是否过期
+    function isTokenExpired() {
+      if (!tokenInfo.value) return
+      if ('exp' in tokenInfo.value) {
+        const currentTimestamp = Math.floor(Date.now() / 1000) // 当前时间的 Unix 时间戳
+        return currentTimestamp >= tokenInfo.value.exp
+      }
+      return true
+    }
+
+    return { isLogin, tokenInfo, authInfo, login, logout, isTokenExpired }
   },
   {
     persist: true
