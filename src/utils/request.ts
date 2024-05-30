@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { errorCodeJudgment } from '@/utils/status'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/userStore'
 import { watchEffect } from 'vue'
+import { useNotificationStore } from '@/stores/notificationStore'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
@@ -19,7 +20,6 @@ instance.interceptors.request.use(
     watchEffect(() => {
       if (userStore.isTokenExpired()) {
         userStore.logout()
-        console.log('Token 过期，请重新登录')
       }
     })
 
@@ -40,9 +40,20 @@ instance.interceptors.response.use(
     return response
   },
   (error) => {
+    const notificationStore = useNotificationStore()
+    let errorMessage = '请求失败'
     if (error.response) {
-      errorCodeJudgment(error.response.status)
+      errorMessage = error.response.data.message || errorCodeJudgment(error.response.status)
+      error.response.data = {
+        status: 'error',
+        message: errorMessage,
+        data: error.response.data
+      }
     }
+    notificationStore.addNotification({
+      message: errorMessage,
+      type: 'error'
+    })
     return Promise.reject(error)
   }
 )

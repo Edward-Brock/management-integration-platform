@@ -2,7 +2,7 @@
 import { getOptionsList } from '@/apis/options'
 import { onMounted, reactive, ref } from 'vue'
 import router from '@/router'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/userStore'
 
 interface Option {
   name: string
@@ -75,15 +75,22 @@ onMounted(async () => {
             <v-avatar size="36" :image="userInfo?.avatar"></v-avatar>
           </v-btn>
         </template>
-        <v-card>
-          <v-card-text elevation="2">
-            <div class="mx-auto text-center mr-4">
-              <v-avatar size="36" :image="userInfo?.avatar"></v-avatar>
-              <div class="mt-2">{{ userInfo.username }}</div>
-              <v-divider class="my-3"></v-divider>
-              <v-btn variant="plain"> {{ $t('user.profile') }} </v-btn>
-              <v-divider class="my-3"></v-divider>
-              <v-btn variant="plain" @click="logout"> {{ $t('user.signOut') }} </v-btn>
+        <v-card min-width="300" max-width="400" elevation="2">
+          <template v-slot:prepend>
+            <v-avatar size="48" :image="userInfo.avatar"></v-avatar>
+          </template>
+
+          <template v-slot:title>{{ userInfo.username }}</template>
+          <v-card-text>
+            <div class="mx-auto mr-4">
+              <v-divider class="my-2"></v-divider>
+              <v-btn variant="plain" :ripple="false" prepend-icon="mdi-account">
+                {{ $t('user.profile') }}
+              </v-btn>
+              <v-divider class="my-2"></v-divider>
+              <v-btn variant="plain" :ripple="false" prepend-icon="mdi-logout" @click="logout">
+                {{ $t('user.signOut') }}
+              </v-btn>
             </div>
           </v-card-text>
         </v-card>
