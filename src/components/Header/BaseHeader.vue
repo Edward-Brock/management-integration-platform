@@ -72,7 +72,7 @@ onMounted(async () => {
       <v-menu min-width="250px" rounded>
         <template v-slot:activator="{ props }">
           <v-btn size="36" icon v-bind="props" :ripple="false">
-            <v-avatar size="36" :image="userInfo?.avatar"></v-avatar>
+            <v-avatar size="36" :image="userInfo.avatar"></v-avatar>
           </v-btn>
         </template>
         <v-card min-width="300" max-width="400" elevation="2">
@@ -80,7 +80,15 @@ onMounted(async () => {
             <v-avatar size="48" :image="userInfo.avatar"></v-avatar>
           </template>
 
-          <template v-slot:title>{{ userInfo.username }}</template>
+          <template v-slot:title>
+            <!-- 显示当前登录的用户真实姓名字段 -->
+            <div class="font-weight-black">
+              {{ userInfo.name ? userInfo.name : userInfo.username }}
+            </div>
+
+            <!-- 显示当前登录的用户名 -->
+            <div class="text-subtitle-1 text-grey-darken-1">{{ userInfo.username }}</div>
+          </template>
           <v-card-text>
             <div class="mx-auto mr-4">
               <v-divider class="my-2"></v-divider>

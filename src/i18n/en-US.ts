@@ -25,6 +25,15 @@ export default {
     profile: 'Profile',
     settings: 'Settings'
   },
+  earlyMorning: {
+    earlyMorning: 'Good morning',
+    morning: 'Good morning',
+    noon: 'Good noon',
+    afternoon: 'Good afternoon',
+    evening: 'Good evening',
+    night: 'Good evening',
+    lateNight: 'Good late at night'
+  },
   // 展开 Vuetify 英文语言包所有项目
   ...en
 }

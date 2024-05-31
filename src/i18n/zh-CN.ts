@@ -25,6 +25,15 @@ export default {
     profile: '个人信息',
     settings: '设置'
   },
+  earlyMorning: {
+    earlyMorning: '早上好',
+    morning: '上午好',
+    noon: '中午好',
+    afternoon: '下午好',
+    evening: '傍晚好',
+    night: '晚上好',
+    lateNight: '深夜好'
+  },
   // 展开 Vuetify 简体中文语言包所有项目
   ...zhHans
 }

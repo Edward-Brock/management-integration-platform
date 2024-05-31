@@ -1,8 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ProfileCard from '@/components/ProfileCard/ProfileCard.vue'
+</script>
 
 <template>
-  <div class="px-4">
-    <h1>HomeView</h1>
+  <div class="px-4 mt-4 d-flex justify-center flex-wrap" style="user-select: none">
+    <ProfileCard />
   </div>
 </template>
 

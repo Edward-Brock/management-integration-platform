@@ -40,7 +40,10 @@ async function validate() {
 </script>
 
 <template>
-  <v-sheet class="h-100 mx-auto d-flex flex-column justify-center align-center">
+  <v-sheet
+    class="h-100 mx-auto d-flex flex-column justify-center align-center"
+    style="user-select: none"
+  >
     <h2 class="mb-8">{{ $t('login.sign_in_to_your_account') }}</h2>
     <v-form ref="form">
       <v-text-field
