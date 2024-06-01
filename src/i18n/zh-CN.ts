@@ -6,11 +6,16 @@ export default {
     about: '关于'
   },
   login: {
-    sign_in_to_your_account: '登录你的账户',
+    register_account: '注册账户',
+    register_mip_account: '注册 MIP 账户',
+    register_account_linked: '还没有账户？{action}',
+    sign_in_to_your_account: '@:user.signIn MIP 账户',
     username: '用户名',
-    password: '密码'
+    password: '密码',
+    confirmPassword: '确认密码'
   },
   validation: {
+    passwordsDoNotMatch: '密码不匹配',
     usernameRequired: '需要用户名',
     usernameLengthMin: '用户名需大于 4 个字符',
     usernameLengthMax: '用户名需小于 20 个字符',

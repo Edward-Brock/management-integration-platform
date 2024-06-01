@@ -9,24 +9,32 @@ const { t } = useI18n()
 const form = ref()
 
 const userInfo = reactive({
-  username: '',
-  password: ''
+  username: '', // 用户名
+  password: '', // 密码
+  confirmPassword: '' // 确认密码
 })
-const passwordInputShow = ref(false)
+const passwordInputShow = ref(false) // 密码字段可见
+const confirmPasswordInputShow = ref(false) // 确认密码字段可见
 
-/**
- * 用户名验证
- */
+// 用户名字段验证
 const UsernameRules = ref([
   (v: any) => !!v || t('validation.usernameRequired'),
   (v: any) => (v && v.length >= 4) || t('validation.usernameLengthMin'),
   (v: any) => (v && v.length <= 20) || t('validation.usernameLengthMax')
 ])
 
+// 密码字段验证
 const PasswordRules = ref([
   (v: any) => !!v || t('validation.passwordRequired'),
   (v: any) => (v && v.length >= 6) || t('validation.passwordLengthMin'),
   (v: any) => (v && v.length <= 36) || t('validation.passwordLengthMax')
+])
+
+// 确认密码验证
+const ConfirmPasswordRules = ref([
+  (v: any) => !!v || t('validation.passwordRequired'),
+  (v: any) =>
+    (v && userInfo.confirmPassword === userInfo.password) || t('validation.passwordsDoNotMatch')
 ])
 
 async function validate(e: any) {
@@ -34,7 +42,8 @@ async function validate(e: any) {
   const { valid } = await form.value.validate()
 
   if (valid) {
-    await useUserStore().login(userInfo)
+    const { confirmPassword, ...dataToSubmit } = userInfo
+    await useUserStore().register(dataToSubmit)
   }
 }
 </script>
@@ -44,7 +53,7 @@ async function validate(e: any) {
     class="h-100 mx-auto d-flex flex-column justify-center align-center"
     style="user-select: none"
   >
-    <h2 class="mb-8">{{ $t('login.sign_in_to_your_account') }}</h2>
+    <h2 class="mb-8">{{ $t('login.register_mip_account') }}</h2>
     <v-form ref="form" @submit="validate">
       <v-text-field
         v-model="userInfo.username"
@@ -71,20 +80,30 @@ async function validate(e: any) {
         required
       ></v-text-field>
 
+      <v-text-field
+        class="mt-4"
+        v-model="userInfo.confirmPassword"
+        :append-inner-icon="confirmPasswordInputShow ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="confirmPasswordInputShow ? 'text' : 'password'"
+        :rules="ConfirmPasswordRules"
+        :label="$t('login.confirmPassword')"
+        prepend-inner-icon="mdi-form-textbox-password"
+        clearable
+        variant="outlined"
+        width="360"
+        @click:append-inner="confirmPasswordInputShow = !confirmPasswordInputShow"
+        required
+      ></v-text-field>
+
       <div class="d-flex flex-column">
         <v-btn type="submit" class="mt-4" variant="tonal" size="large" block
-          >{{ $t('user.signIn') }}
+          >{{ $t('user.register') }}
         </v-btn>
       </div>
     </v-form>
-    <i18n-t class="mt-4 text-grey-lighten-1" keypath="login.register_account_linked" tag="p">
-      <template #action>
-        <v-btn variant="text" elevation="0" :ripple="false" to="/register">
-          {{ $t('login.register_account') }}
-        </v-btn>
-      </template>
-    </i18n-t>
   </v-sheet>
 </template>
+
+<style scoped></style>
 
 <style scoped></style>

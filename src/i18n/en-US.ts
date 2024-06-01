@@ -6,11 +6,16 @@ export default {
     about: 'About'
   },
   login: {
-    sign_in_to_your_account: 'Sign in to your account',
+    register_account: 'Register account',
+    register_mip_account: 'Register mip account',
+    register_account_linked: "Don't have an account yet? {action}",
+    sign_in_to_your_account: '@:user.signIn to MIP account',
     username: 'Username',
-    password: 'Password'
+    password: 'Password',
+    confirmPassword: 'Confirm @login.password'
   },
   validation: {
+    passwordsDoNotMatch: 'Passwords do not match',
     usernameRequired: 'Username is required',
     usernameLengthMin: 'Username must be more than 4 characters',
     usernameLengthMax: 'Username must be less than 20 characters',

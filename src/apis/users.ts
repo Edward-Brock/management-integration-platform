@@ -1,15 +1,23 @@
 import { request } from '@/utils/methods'
 
-interface Login {
+interface User {
   username: string
   password: string
+}
+
+/**
+ * 用户注册接口
+ * @param data username, password
+ */
+export function postUserRegister(data: User) {
+  return request('POST', 'auth/register', { data })
 }
 
 /**
  * 用户登录接口
  * @param data username, password
  */
-export function postUserLogin(data: Login) {
+export function postUserLogin(data: User) {
   return request('POST', 'auth/login', { data })
 }
 

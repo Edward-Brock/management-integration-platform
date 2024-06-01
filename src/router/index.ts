@@ -10,6 +10,7 @@ const router = createRouter({
     {
       path: '/',
       component: DefaultLayout,
+      meta: { requiresAuth: true }, // 需要登录验证
       children: [
         {
           path: '/',
@@ -33,22 +34,34 @@ const router = createRouter({
           component: () => import('../views/LoginView.vue')
         }
       ]
+    },
+    {
+      path: '/register',
+      component: LoginLayout,
+      children: [
+        {
+          path: '',
+          name: 'register',
+          component: () => import('../views/RegisterView.vue')
+        }
+      ]
     }
   ]
 })
 
+// 路由守卫
 router.beforeEach((to, from, next) => {
   const store = useUserStore()
-  // 获取是否登录的状态
-  const isLogin = store.isLogin
-  // 访问的请求不是 login 且未登录则跳转至登录页
-  if (to.name !== 'login' && !isLogin) {
+  const isLogin = store.isLogin // 获取是否登录的状态
+
+  // 如果目标路由需要验证且未登录，则跳转至登录页
+  if (to.matched.some((record) => record.meta.requiresAuth) && !isLogin) {
     next({ name: 'login' })
   } else if (to.name == 'login' && isLogin) {
-    // 已登录并继续尝试登录请求则跳转至首页
+    // 如果已登录且试图访问登录页，则跳转至首页
     next({ name: 'home' })
   } else {
-    // 不存在上述判断继续执行
+    // 如果以上条件都不满足，则继续导航
     next()
   }
 })
