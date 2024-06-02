@@ -3,7 +3,9 @@ import { en } from 'vuetify/locale'
 export default {
   general: {
     dashboard: 'Dashboard',
-    about: 'About'
+    about: 'About',
+    settings_panel: 'Settings Panel',
+    current_release: 'Current release'
   },
   login: {
     register_account: 'Register account',
@@ -38,6 +40,14 @@ export default {
     evening: 'Good evening',
     night: 'Good evening',
     lateNight: 'Good late at night'
+  },
+  setting: {
+    theme: {
+      title: 'Theme',
+      subtitle: 'Customize the current website using a light or dark theme',
+      light: 'Light',
+      dark: 'Dark'
+    }
   },
   // 展开 Vuetify 英文语言包所有项目
   ...en

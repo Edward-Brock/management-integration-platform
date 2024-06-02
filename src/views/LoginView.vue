@@ -2,7 +2,6 @@
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/userStore'
-import router from '@/router'
 
 const { t } = useI18n()
 

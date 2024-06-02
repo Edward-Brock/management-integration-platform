@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router'
 <template>
   <v-app>
     <!-- Header -->
-    <v-app-bar class="px-4" style="user-select: none" :elevation="0" height="48">
+    <v-app-bar class="px-4" style="user-select: none" :elevation="0">
       <BaseHeader />
     </v-app-bar>
     <!-- main -->

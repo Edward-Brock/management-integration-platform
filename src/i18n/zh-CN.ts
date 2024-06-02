@@ -3,7 +3,9 @@ import { zhHans } from 'vuetify/locale'
 export default {
   general: {
     dashboard: '仪表盘',
-    about: '关于'
+    about: '关于',
+    settings_panel: '设置面板',
+    current_release: '当前版本'
   },
   login: {
     register_account: '注册账户',
@@ -38,6 +40,14 @@ export default {
     evening: '傍晚好',
     night: '晚上好',
     lateNight: '深夜好'
+  },
+  setting: {
+    theme: {
+      title: '主题',
+      subtitle: '自定义当前网站使用明亮或黑暗主题',
+      light: '浅色主题',
+      dark: '黑暗主题'
+    }
   },
   // 展开 Vuetify 简体中文语言包所有项目
   ...zhHans
