@@ -9,12 +9,12 @@ export default {
   },
   login: {
     register_account: 'Register account',
-    register_mip_account: 'Register mip account',
+    register_mip_account: 'Register MIP account',
     register_account_linked: "Don't have an account yet? {action}",
     sign_in_to_your_account: '@:user.signIn to MIP account',
     username: 'Username',
     password: 'Password',
-    confirmPassword: 'Confirm @login.password'
+    confirmPassword: 'Confirm @:login.password'
   },
   validation: {
     passwordsDoNotMatch: 'Passwords do not match',

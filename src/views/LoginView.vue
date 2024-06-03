@@ -76,7 +76,11 @@ async function validate(e: any) {
         </v-btn>
       </div>
     </v-form>
-    <i18n-t class="mt-4 text-grey-lighten-1" keypath="login.register_account_linked" tag="p">
+    <i18n-t
+      class="mt-4 px-4 text-grey-lighten-1 d-flex justify-center align-center flex-wrap"
+      keypath="login.register_account_linked"
+      tag="p"
+    >
       <template #action>
         <v-btn variant="text" elevation="0" :ripple="false" to="/register">
           {{ $t('login.register_account') }}

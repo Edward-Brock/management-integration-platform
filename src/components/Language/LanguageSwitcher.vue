@@ -8,6 +8,10 @@ const optionStore = useOptionStore()
 const menu = ref(false)
 const reload: any = inject('reload')
 
+interface Options {
+  language?: string
+}
+
 const languages = reactive({
   select: 'navigator.language',
   language: [
@@ -24,8 +28,18 @@ function changeLanguage(language: string) {
   reload()
 }
 
+// 获取本地存储的 option 并转为 JSON 格式，如果获取不到则返回一个空对象
+let options: Options = {}
+try {
+  const storedOptions = localStorage.getItem('option')
+  if (storedOptions) {
+    options = JSON.parse(storedOptions)
+  }
+} catch (error) {
+  console.error('Error parsing localStorage option:', error)
+}
+
 onMounted(() => {
-  const options = JSON.parse(localStorage.getItem('option') || '')
   languages.select = options.language || 'navigator.language'
 })
 </script>

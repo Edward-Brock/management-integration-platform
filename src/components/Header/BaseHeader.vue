@@ -12,6 +12,9 @@ interface Option {
   autoload: boolean
 }
 
+// 从 Layout 中读取 hideContent 判断是否需要隐藏部分组件
+const props = defineProps(['hideContent'])
+
 const service = reactive({
   info: [] as Option[],
   name_simple: '',
@@ -63,60 +66,71 @@ onMounted(async () => {
         <v-tooltip activator="parent" location="bottom start">{{ service.name_full }}</v-tooltip>
       </v-img>
     </div>
-    <!-- 通过 Pinia 中的 isLogin 登录标记判断当前登录状态，如果为 False 则显示登录按钮 -->
-    <div v-if="!useUserStore().isLogin">
-      <div @click="router.push('/login')">
-        <v-col cols="auto">
-          <v-btn append-icon="mdi-login">
-            {{ $t('user.signIn') }}
-          </v-btn>
-        </v-col>
-      </div>
-    </div>
-    <!-- isLogin 登录标记为 True 则显示当前用户头像 -->
-    <div v-else>
-      <template class="d-flex align-center justify-center">
-        <!-- 语言切换 -->
-        <LanguageSwitcher />
-        <!-- 设置面板 -->
-        <SettingsPanel />
-        <!-- 用户头像 -->
-        <v-menu min-width="250px" rounded>
-          <template v-slot:activator="{ props }">
-            <v-btn class="ml-2" size="48" icon v-bind="props" :ripple="false">
-              <v-avatar size="36" :image="userInfo.avatar"></v-avatar>
-            </v-btn>
+
+    <template class="d-flex justify-center align-center">
+      <!-- 语言切换 -->
+      <LanguageSwitcher />
+      <!-- 判断当前 Layout 是否需要隐藏下列组件 -->
+      <template v-if="!props.hideContent">
+        <!-- 通过 Pinia 中的 isLogin 登录标记判断当前登录状态，如果为 False 则显示登录按钮 -->
+        <div v-if="!useUserStore().isLogin">
+          <div @click="router.push('/login')">
+            <v-col cols="auto">
+              <v-btn append-icon="mdi-login">
+                {{ $t('user.signIn') }}
+              </v-btn>
+            </v-col>
+          </div>
+        </div>
+        <!-- isLogin 登录标记为 True 则显示当前用户头像 -->
+        <div v-else>
+          <template class="d-flex align-center justify-center">
+            <!-- 设置面板 -->
+            <SettingsPanel class="ml-2" />
+            <!-- 用户头像 -->
+            <v-menu min-width="250px" rounded>
+              <template v-slot:activator="{ props }">
+                <v-btn class="ml-2" size="48" icon="" v-bind="props" :ripple="false">
+                  <v-avatar size="36" :image="userInfo.avatar"></v-avatar>
+                </v-btn>
+              </template>
+              <v-card class="mt-4" min-width="300" max-width="400" elevation="2">
+                <template v-slot:prepend>
+                  <v-avatar class="mr-2" size="48" :image="userInfo.avatar"></v-avatar>
+                </template>
+
+                <template v-slot:title>
+                  <!-- 显示当前登录的用户真实姓名字段 -->
+                  <div class="font-weight-black">
+                    {{ userInfo.name ? userInfo.name : userInfo.username }}
+                  </div>
+
+                  <!-- 显示当前登录的用户名 -->
+                  <div class="text-subtitle-1 text-grey-darken-1">{{ userInfo.username }}</div>
+                </template>
+                <v-card-text>
+                  <div class="mx-auto mr-4">
+                    <v-divider class="my-2"></v-divider>
+                    <v-btn variant="plain" :ripple="false" prepend-icon="mdi-account">
+                      {{ $t('user.profile') }}
+                    </v-btn>
+                    <v-divider class="my-2"></v-divider>
+                    <v-btn
+                      variant="plain"
+                      :ripple="false"
+                      prepend-icon="mdi-logout"
+                      @click="logout"
+                    >
+                      {{ $t('user.signOut') }}
+                    </v-btn>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-menu>
           </template>
-          <v-card class="mt-4" min-width="300" max-width="400" elevation="2">
-            <template v-slot:prepend>
-              <v-avatar class="mr-2" size="48" :image="userInfo.avatar"></v-avatar>
-            </template>
-
-            <template v-slot:title>
-              <!-- 显示当前登录的用户真实姓名字段 -->
-              <div class="font-weight-black">
-                {{ userInfo.name ? userInfo.name : userInfo.username }}
-              </div>
-
-              <!-- 显示当前登录的用户名 -->
-              <div class="text-subtitle-1 text-grey-darken-1">{{ userInfo.username }}</div>
-            </template>
-            <v-card-text>
-              <div class="mx-auto mr-4">
-                <v-divider class="my-2"></v-divider>
-                <v-btn variant="plain" :ripple="false" prepend-icon="mdi-account">
-                  {{ $t('user.profile') }}
-                </v-btn>
-                <v-divider class="my-2"></v-divider>
-                <v-btn variant="plain" :ripple="false" prepend-icon="mdi-logout" @click="logout">
-                  {{ $t('user.signOut') }}
-                </v-btn>
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-menu>
+        </div>
       </template>
-    </div>
+    </template>
   </div>
 </template>
 
