@@ -4,26 +4,26 @@ import { useI18n } from 'vue-i18n'
 import { useTheme } from 'vuetify'
 
 const { t } = useI18n()
-
-// 设置面板状态
-const isPanelOpen = ref(false)
-
-// 主题选择
-const themeRadio = reactive({
-  select: 'lightTheme',
-  theme: [
-    { label: t('setting.theme.light'), value: 'lightTheme', disabled: false },
-    { label: t('setting.theme.dark'), value: 'darkTheme', disabled: true }
-  ]
-})
-
 const theme = useTheme()
 
-watch(themeRadio, (newValue) => {
-  theme.global.name.value = newValue.select
+// 面板状态
+const isPanelOpen = ref(false)
+// 当前版本
+const currentRelease = ref('')
+
+const settings = reactive({
+  themes: {
+    select: 'lightTheme',
+    theme: [
+      { label: t('setting.theme.light'), value: 'lightTheme', disabled: false },
+      { label: t('setting.theme.dark'), value: 'darkTheme', disabled: true }
+    ]
+  }
 })
 
-const currentRelease = ref('')
+watch(settings, (newValue) => {
+  theme.global.name.value = newValue.themes.select
+})
 
 onMounted(() => {
   currentRelease.value = __VERSION__
@@ -61,8 +61,8 @@ onMounted(() => {
                 >
                   <template v-slot:actions>
                     <v-radio-group
-                      v-model="themeRadio.select"
-                      v-for="item in themeRadio.theme"
+                      v-model="settings.themes.select"
+                      v-for="item in settings.themes.theme"
                       :key="item.label"
                     >
                       <v-radio

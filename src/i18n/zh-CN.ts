@@ -47,6 +47,12 @@ export default {
       subtitle: '自定义当前网站使用明亮或黑暗主题',
       light: '浅色主题',
       dark: '黑暗主题'
+    },
+    language: {
+      title: '语言',
+      autoDetection: '自动检测',
+      zhCN: '简体中文',
+      enUS: '英文'
     }
   },
   // 展开 Vuetify 简体中文语言包所有项目

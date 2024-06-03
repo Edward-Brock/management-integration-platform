@@ -4,6 +4,7 @@ import { onMounted, reactive, ref } from 'vue'
 import router from '@/router'
 import { useUserStore } from '@/stores/userStore'
 import SettingsPanel from '@/components/Panel/SettingPanel.vue'
+import LanguageSwitcher from '@/components/Language/LanguageSwitcher.vue'
 
 interface Option {
   name: string
@@ -72,21 +73,23 @@ onMounted(async () => {
         </v-col>
       </div>
     </div>
-    <!-- isLogin 登陆标记为 True 则显示当前用户头像 -->
+    <!-- isLogin 登录标记为 True 则显示当前用户头像 -->
     <div v-else>
       <template class="d-flex align-center justify-center">
+        <!-- 语言切换 -->
+        <LanguageSwitcher />
         <!-- 设置面板 -->
         <SettingsPanel />
         <!-- 用户头像 -->
         <v-menu min-width="250px" rounded>
           <template v-slot:activator="{ props }">
-            <v-btn class="ml-2" size="36" icon v-bind="props" :ripple="false">
+            <v-btn class="ml-2" size="48" icon v-bind="props" :ripple="false">
               <v-avatar size="36" :image="userInfo.avatar"></v-avatar>
             </v-btn>
           </template>
           <v-card class="mt-4" min-width="300" max-width="400" elevation="2">
             <template v-slot:prepend>
-              <v-avatar size="48" :image="userInfo.avatar"></v-avatar>
+              <v-avatar class="mr-2" size="48" :image="userInfo.avatar"></v-avatar>
             </template>
 
             <template v-slot:title>

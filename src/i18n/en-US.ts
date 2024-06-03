@@ -47,6 +47,12 @@ export default {
       subtitle: 'Customize the current website using a light or dark theme',
       light: 'Light',
       dark: 'Dark'
+    },
+    language: {
+      title: 'Language',
+      autoDetection: 'Automatic Detection',
+      zhCN: 'Chinese (Simplified)',
+      enUS: 'English'
     }
   },
   // 展开 Vuetify 英文语言包所有项目
