@@ -27,3 +27,7 @@ export function postUserLogin(data: User) {
 export function getUserProfile() {
   return request('GET', 'auth/profile')
 }
+
+export async function patchUserProfile(id: string, data: any) {
+  return request('PATCH', 'users/' + id, { data })
+}

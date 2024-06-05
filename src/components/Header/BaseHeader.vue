@@ -12,6 +12,14 @@ interface Option {
   autoload: boolean
 }
 
+interface UserInfo {
+  id: number
+  name: string
+  username: string
+  avatar: string
+  email: string
+}
+
 // 从 Layout 中读取 hideContent 判断是否需要隐藏部分组件
 const props = defineProps(['hideContent'])
 
@@ -21,14 +29,6 @@ const service = reactive({
   name_full: '',
   logo: ''
 })
-
-interface UserInfo {
-  id: number
-  name: string
-  username: string
-  avatar: string
-  email: string
-}
 
 const userInfo = ref({} as UserInfo)
 
@@ -111,7 +111,12 @@ onMounted(async () => {
                 <v-card-text>
                   <div class="mx-auto mr-4">
                     <v-divider class="my-2"></v-divider>
-                    <v-btn variant="plain" :ripple="false" prepend-icon="mdi-account">
+                    <v-btn
+                      variant="plain"
+                      :ripple="false"
+                      prepend-icon="mdi-account"
+                      @click="router.push('/user/profile')"
+                    >
                       {{ $t('user.profile') }}
                     </v-btn>
                     <v-divider class="my-2"></v-divider>

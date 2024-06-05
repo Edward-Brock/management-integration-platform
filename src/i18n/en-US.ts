@@ -19,6 +19,7 @@ export default {
   validation: {
     passwordsDoNotMatch: 'Passwords do not match',
     usernameRequired: 'Username is required',
+    NicknameRequired: 'Nickname is required',
     usernameLengthMin: 'Username must be more than 4 characters',
     usernameLengthMax: 'Username must be less than 20 characters',
     passwordRequired: 'Password is required',
@@ -29,8 +30,13 @@ export default {
     register: 'Register',
     signIn: 'Login',
     signOut: 'Sign Out',
+    update_profile: 'Update @:user.profile',
     profile: 'Profile',
-    settings: 'Settings'
+    prefix_profile: 'Your @:user.profile',
+    settings: 'Settings',
+    name: 'Nickname',
+    email: 'Email',
+    mobile: 'Mobile'
   },
   earlyMorning: {
     earlyMorning: 'Good morning',

@@ -19,6 +19,7 @@ export default {
   validation: {
     passwordsDoNotMatch: '密码不匹配',
     usernameRequired: '需要用户名',
+    NicknameRequired: '需要昵称',
     usernameLengthMin: '用户名需大于 4 个字符',
     usernameLengthMax: '用户名需小于 20 个字符',
     passwordRequired: '需要密码',
@@ -29,8 +30,13 @@ export default {
     register: '注册',
     signIn: '登录',
     signOut: '登出',
+    update_profile: '更新@:user.profile',
     profile: '个人信息',
-    settings: '设置'
+    prefix_profile: '你的@:user.profile',
+    settings: '设置',
+    name: '昵称',
+    email: '电子邮箱',
+    mobile: '手机号码'
   },
   earlyMorning: {
     earlyMorning: '早上好',

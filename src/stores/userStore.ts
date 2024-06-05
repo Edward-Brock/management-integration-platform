@@ -45,6 +45,10 @@ export const useUserStore = defineStore(
       }
     }
 
+    async function refreshUserInfo() {
+      authInfo.value = await getUserProfile()
+    }
+
     // 退出逻辑
     function logout() {
       isLogin.value = false
@@ -63,7 +67,16 @@ export const useUserStore = defineStore(
       return true
     }
 
-    return { isLogin, tokenInfo, authInfo, register, login, logout, isTokenExpired }
+    return {
+      isLogin,
+      tokenInfo,
+      authInfo,
+      register,
+      login,
+      refreshUserInfo,
+      logout,
+      isTokenExpired
+    }
   },
   {
     persist: true
