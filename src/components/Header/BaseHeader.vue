@@ -22,6 +22,7 @@ interface UserInfo {
 
 // 从 Layout 中读取 hideContent 判断是否需要隐藏部分组件
 const props = defineProps(['hideContent'])
+const baseUrl = import.meta.env.VITE_APP_BASE_URL
 
 const service = reactive({
   info: [] as Option[],
@@ -58,7 +59,9 @@ onMounted(async () => {
   const userStore = useUserStore()
   userInfo.value = {
     ...userStore.authInfo,
-    avatar: `${import.meta.env.VITE_APP_BASE_URL}/${userStore.authInfo.avatar}`
+    avatar: userStore.authInfo.avatar.startsWith(baseUrl)
+      ? userStore.authInfo.avatar
+      : `${baseUrl}/${userStore.authInfo.avatar}`
   }
 })
 </script>

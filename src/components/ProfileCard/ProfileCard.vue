@@ -29,7 +29,9 @@ const greetingByTime = getGreetingByTime(currentDate)
 
 const userInfo = useUserStore().authInfo
 const baseUrl = import.meta.env.VITE_APP_BASE_URL
-const avatarUrl = `${baseUrl}/${userInfo.avatar}`
+const avatarUrl = userInfo.avatar.startsWith(baseUrl)
+  ? userInfo.avatar
+  : `${baseUrl}/${userInfo.avatar}`
 </script>
 
 <template>

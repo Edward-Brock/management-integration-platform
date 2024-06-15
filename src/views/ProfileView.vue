@@ -71,7 +71,10 @@ async function updateUserInfo() {
     const changes: Partial<typeof userInfo> = {}
     // 循环获取已被修改的字段
     for (const key in userInfo) {
-      if (userInfo[key as keyof typeof userInfo] !== _userInfo[key as keyof typeof _userInfo]) {
+      if (
+        key !== 'avatar' &&
+        userInfo[key as keyof typeof userInfo] !== _userInfo[key as keyof typeof _userInfo]
+      ) {
         changes[key as keyof typeof userInfo] = userInfo[key as keyof typeof userInfo]
       }
     }
@@ -103,7 +106,16 @@ onMounted(() => {
   >
     <h2 class="mb-8">{{ $t('user.prefix_profile') }}</h2>
     <v-form class="d-flex flex-column align-center" ref="form" @submit="validate">
-      <v-avatar :image="userInfo.avatar" size="128" @click="avatarDialog = true"></v-avatar>
+      <v-tooltip :text="t('user.change_avatar')">
+        <template v-slot:activator="{ props }">
+          <v-avatar
+            v-bind="props"
+            :image="userInfo.avatar"
+            size="128"
+            @click="avatarDialog = true"
+          ></v-avatar>
+        </template>
+      </v-tooltip>
 
       <v-text-field
         class="mt-8"

@@ -37,7 +37,8 @@ export default {
     name: '昵称',
     email: '电子邮箱',
     mobile: '手机号码',
-    upload_avatar: '上传头像'
+    upload_avatar: '上传头像',
+    change_avatar: '点击更改头像'
   },
   earlyMorning: {
     earlyMorning: '早上好',
