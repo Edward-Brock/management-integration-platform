@@ -28,11 +28,13 @@ const currentDate = new Date()
 const greetingByTime = getGreetingByTime(currentDate)
 
 const userInfo = useUserStore().authInfo
+const baseUrl = import.meta.env.VITE_APP_BASE_URL
+const avatarUrl = `${baseUrl}/${userInfo.avatar}`
 </script>
 
 <template>
   <v-card width="320" height="320" elevation="0" class="pa-6 d-flex flex-column justify-end">
-    <v-avatar class="mb-4" size="96" :image="userInfo.avatar"></v-avatar>
+    <v-avatar class="mb-4" size="96" :image="avatarUrl"></v-avatar>
 
     <h2 class="mb-1 font-weight-black text-h4">
       {{ userInfo.name ? userInfo.name : userInfo.username }}

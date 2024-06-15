@@ -28,6 +28,19 @@ export function getUserProfile() {
   return request('GET', 'auth/profile')
 }
 
-export async function patchUserProfile(id: string, data: any) {
+/**
+ * 更新用户信息
+ * @param id 用户 ID
+ * @param data
+ */
+export async function patchUserProfile(id: string, data?: any) {
   return request('PATCH', 'users/' + id, { data })
+}
+
+export function changeUserAvatar(avatar: File) {
+  const formData = new FormData()
+  formData.append('avatar', avatar)
+  return request('POST', 'users/upload', {
+    data: formData
+  })
 }

@@ -36,7 +36,8 @@ export default {
     settings: 'Settings',
     name: 'Nickname',
     email: 'Email',
-    mobile: 'Mobile'
+    mobile: 'Mobile',
+    upload_avatar: 'Upload Avatar'
   },
   earlyMorning: {
     earlyMorning: 'Good morning',
@@ -48,6 +49,12 @@ export default {
     lateNight: 'Good late at night'
   },
   setting: {
+    window: {
+      cancel: 'Cancel',
+      ok: 'Ok',
+      choose_avatar: 'Choose your avatar',
+      upload: 'Upload'
+    },
     theme: {
       title: 'Theme',
       subtitle: 'Customize the current website using a light or dark theme',

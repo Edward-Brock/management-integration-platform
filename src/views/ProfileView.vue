@@ -3,6 +3,7 @@ import { inject, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/userStore'
 import { patchUserProfile } from '@/apis/users'
+import AvatarUpload from '@/components/ProfileCard/AvatarUpload.vue'
 
 const { t } = useI18n()
 const userStore = useUserStore()
@@ -36,6 +37,7 @@ const UsernameRules = ref(
   createLengthRule(4, 20, 'validation.usernameRequired', 'validation.usernameLengthMax')
 )
 const NicknameRules = ref(createRequiredRule('validation.NicknameRequired'))
+const avatarDialog = ref(false) // 用于控制 AvatarUpload 组件的显示
 
 async function validate(e: any) {
   e.preventDefault()
@@ -55,6 +57,7 @@ async function fetchUserInfo() {
     const data = userStore.authInfo
     Object.assign(_userInfo, data)
     Object.assign(userInfo, data)
+    userInfo.avatar = `${import.meta.env.VITE_APP_BASE_URL}/${userStore.authInfo.avatar}`
   } catch (error) {
     console.error('Error fetching user info:', error)
   }
@@ -100,7 +103,7 @@ onMounted(() => {
   >
     <h2 class="mb-8">{{ $t('user.prefix_profile') }}</h2>
     <v-form class="d-flex flex-column align-center" ref="form" @submit="validate">
-      <v-avatar :image="userInfo.avatar" color="info" size="128"></v-avatar>
+      <v-avatar :image="userInfo.avatar" size="128" @click="avatarDialog = true"></v-avatar>
 
       <v-text-field
         class="mt-8"
@@ -149,6 +152,8 @@ onMounted(() => {
       </div>
     </v-form>
   </v-sheet>
+
+  <AvatarUpload v-model="avatarDialog" />
 </template>
 
 <style scoped></style>

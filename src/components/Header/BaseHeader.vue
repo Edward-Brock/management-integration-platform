@@ -55,14 +55,25 @@ onMounted(async () => {
   service.name_full = getValueByName(service.info, 'service_name_full') || ''
   service.name_simple = getValueByName(service.info, 'service_name_simple') || ''
 
-  userInfo.value = useUserStore().authInfo
+  const userStore = useUserStore()
+  userInfo.value = {
+    ...userStore.authInfo,
+    avatar: `${import.meta.env.VITE_APP_BASE_URL}/${userStore.authInfo.avatar}`
+  }
 })
 </script>
 
 <template>
   <div class="w-100 d-flex align-center justify-space-between">
     <div>
-      <v-img :width="46" aspect-ratio="16/9" cover :src="service.logo">
+      <v-img
+        class="cursor-pointer"
+        :width="46"
+        aspect-ratio="16/9"
+        cover
+        :src="service.logo"
+        @click="router.push('/')"
+      >
         <v-tooltip activator="parent" location="bottom start">{{ service.name_full }}</v-tooltip>
       </v-img>
     </div>

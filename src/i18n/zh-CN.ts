@@ -36,7 +36,8 @@ export default {
     settings: '设置',
     name: '昵称',
     email: '电子邮箱',
-    mobile: '手机号码'
+    mobile: '手机号码',
+    upload_avatar: '上传头像'
   },
   earlyMorning: {
     earlyMorning: '早上好',
@@ -48,6 +49,12 @@ export default {
     lateNight: '深夜好'
   },
   setting: {
+    window: {
+      cancel: '取消',
+      ok: '好',
+      choose_avatar: '选择你的头像',
+      upload: '上传'
+    },
     theme: {
       title: '主题',
       subtitle: '自定义当前网站使用明亮或黑暗主题',
