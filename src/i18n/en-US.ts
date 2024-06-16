@@ -55,7 +55,8 @@ export default {
       cancel: 'Cancel',
       ok: 'Ok',
       choose_avatar: 'Choose your avatar',
-      upload: 'Upload'
+      upload: 'Upload',
+      save_success: 'Save success'
     },
     theme: {
       title: 'Theme',
@@ -68,6 +69,19 @@ export default {
       autoDetection: 'Automatic Detection',
       zhCN: 'Chinese (Simplified)',
       enUS: 'English'
+    }
+  },
+  option: {
+    title: 'Website Option',
+    update_option: 'Update Website Option',
+    field_required: 'Required Field',
+    logo: 'Website Logo',
+    full_name: 'Website Full Name',
+    simple_name: 'Website Simple Name',
+    status: 'Website Status',
+    status_selects: {
+      active: 'Service is running normally',
+      stop: 'Service needs to be suspended'
     }
   },
   // 展开 Vuetify 英文语言包所有项目

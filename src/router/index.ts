@@ -25,7 +25,7 @@ const router = createRouter({
         {
           path: '/option',
           name: 'option',
-          component: () => import('../components/Option/WebsiteOption.vue')
+          component: () => import('../views/OptionView.vue')
         }
       ]
     },

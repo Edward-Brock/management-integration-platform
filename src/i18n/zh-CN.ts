@@ -55,7 +55,8 @@ export default {
       cancel: '取消',
       ok: '好',
       choose_avatar: '选择你的头像',
-      upload: '上传'
+      upload: '上传',
+      save_success: '保存成功'
     },
     theme: {
       title: '主题',
@@ -68,6 +69,19 @@ export default {
       autoDetection: '自动检测',
       zhCN: '简体中文',
       enUS: '英文'
+    }
+  },
+  option: {
+    title: '网站配置',
+    update_option: '更新网站配置',
+    field_required: '需要字段',
+    logo: '网站标识',
+    full_name: '网站全程',
+    simple_name: '网站简称',
+    status: '网站服务状态',
+    status_selects: {
+      active: '服务正常运行',
+      stop: '服务需要暂停服务'
     }
   },
   // 展开 Vuetify 简体中文语言包所有项目

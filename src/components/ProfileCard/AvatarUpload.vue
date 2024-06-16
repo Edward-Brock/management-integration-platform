@@ -26,7 +26,7 @@ async function uploadFile() {
 
     // 4. 全局通知保存成功
     notificationStore.addNotification({
-      message: '保存成功',
+      message: t('setting.window.save_success'),
       type: 'success'
     })
     // 5. 刷新保存持久化用户信息数据
