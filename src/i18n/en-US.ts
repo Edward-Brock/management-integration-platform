@@ -38,7 +38,8 @@ export default {
     email: 'Email',
     mobile: 'Mobile',
     upload_avatar: 'Upload Avatar',
-    change_avatar: 'Click to change avatar'
+    change_avatar: 'Click to change avatar',
+    website_option: 'Website Option'
   },
   earlyMorning: {
     earlyMorning: 'Good morning',

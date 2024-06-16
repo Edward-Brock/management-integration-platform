@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getOptionsList } from '@/apis/options'
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import router from '@/router'
 import { useUserStore } from '@/stores/userStore'
 import SettingsPanel from '@/components/Panel/SettingPanel.vue'
@@ -12,18 +12,31 @@ interface Option {
   autoload: boolean
 }
 
+interface Permission {
+  name: string
+  description: string
+}
+
+interface Role {
+  name: string
+  description: string
+  permissions: { permission: Permission }[]
+}
+
 interface UserInfo {
   id: number
   name: string
   username: string
   avatar: string
   email: string
+  roles: { role: Role }[]
 }
 
 // 从 Layout 中读取 hideContent 判断是否需要隐藏部分组件
 const props = defineProps(['hideContent'])
 const baseUrl = import.meta.env.VITE_APP_BASE_URL
 
+// 网站配置内容
 const service = reactive({
   info: [] as Option[],
   name_simple: '',
@@ -33,6 +46,12 @@ const service = reactive({
 
 const userInfo = ref({} as UserInfo)
 
+// 计算属性检查用户是否拥有 ADMIN 权限
+const isAdmin = computed(() => {
+  return userInfo.value.roles.some((role) => role.role.name === 'ADMIN')
+})
+
+// 用户登出
 function logout() {
   const user = useUserStore()
   user.logout()
@@ -49,6 +68,7 @@ const getValueByName = (array: Option[], name: string): string | null => {
 }
 
 onMounted(async () => {
+  // 获取自动加在的网站配置
   await getOptionsList().then((res: any) => {
     service.info = res
   })
@@ -56,6 +76,7 @@ onMounted(async () => {
   service.name_full = getValueByName(service.info, 'service_name_full') || ''
   service.name_simple = getValueByName(service.info, 'service_name_simple') || ''
 
+  // 获取当前登录用户信息
   const userStore = useUserStore()
   userInfo.value = {
     ...userStore.authInfo,
@@ -125,6 +146,7 @@ onMounted(async () => {
                 <v-card-text>
                   <div class="mx-auto mr-4">
                     <v-divider class="my-2"></v-divider>
+                    <!-- 个人信息 -->
                     <v-btn
                       variant="plain"
                       :ripple="false"
@@ -134,6 +156,19 @@ onMounted(async () => {
                       {{ $t('user.profile') }}
                     </v-btn>
                     <v-divider class="my-2"></v-divider>
+                    <!-- 网站配置 -->
+                    <template v-if="isAdmin">
+                      <v-btn
+                        variant="plain"
+                        :ripple="false"
+                        prepend-icon="mdi-tools"
+                        @click="router.push('/option')"
+                      >
+                        {{ $t('user.website_option') }}
+                      </v-btn>
+                      <v-divider class="my-2"></v-divider>
+                    </template>
+                    <!-- 登出 -->
                     <v-btn
                       variant="plain"
                       :ripple="false"
