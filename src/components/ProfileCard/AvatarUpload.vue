@@ -11,6 +11,7 @@ const file = ref<File | null>(null)
 const notificationStore = useNotificationStore()
 const userStore = useUserStore()
 const reload: any = inject('reload')
+const previewAvatar = ref('')
 
 async function uploadFile() {
   // 1. 判断 file 中是否存在内容
@@ -37,17 +38,37 @@ async function uploadFile() {
     console.error('Upload failed:', error)
   }
 }
+
+/**
+ * 通过文件选择器实时显示预览头像
+ * @param e
+ */
+function previewAvatarChange(e: any) {
+  const file = e.target.files[0]
+  const reader = new FileReader()
+  reader.onload = (e: any) => {
+    previewAvatar.value = e.target.result
+  }
+  reader.readAsDataURL(file)
+}
 </script>
 
 <template>
-  <v-dialog v-model="avatarDialog" max-width="600px">
+  <v-dialog style="user-select: none" v-model="avatarDialog" max-width="600px">
     <v-card :title="$t('user.upload_avatar')">
-      <v-card-text>
+      <v-card-text class="d-flex flex-column justify-center align-center">
+        <template class="mb-4 d-flex flex-column justify-center align-center">
+          <v-avatar size="96" :image="previewAvatar"></v-avatar>
+          <span class="mt-2 text-grey text-body-2">{{ $t('user.preview_avatar') }}</span>
+        </template>
+
         <v-file-input
+          class="w-100"
           v-model="file"
-          show-size
           accept=".png,.jpeg,.gif,.webp"
           :label="t('setting.window.choose_avatar')"
+          @change="previewAvatarChange"
+          show-size
           outlined
           dense
         ></v-file-input>

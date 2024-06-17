@@ -106,7 +106,7 @@ onMounted(() => {
   >
     <h2 class="mb-8">{{ $t('user.prefix_profile') }}</h2>
     <v-form class="d-flex flex-column align-center" ref="form" @submit="validate">
-      <v-tooltip :text="t('user.change_avatar')">
+      <v-tooltip location="center" :text="t('user.change_avatar')">
         <template v-slot:activator="{ props }">
           <v-avatar
             v-bind="props"
@@ -118,7 +118,7 @@ onMounted(() => {
       </v-tooltip>
 
       <v-text-field
-        class="mt-8"
+        class="mt-12"
         v-model="userInfo.username"
         :rules="UsernameRules"
         :label="$t('login.username')"

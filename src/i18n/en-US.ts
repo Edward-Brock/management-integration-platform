@@ -38,6 +38,7 @@ export default {
     email: 'Email',
     mobile: 'Mobile',
     upload_avatar: 'Upload Avatar',
+    preview_avatar: 'Preview Avatar',
     change_avatar: 'Click to change avatar',
     website_option: 'Website Option'
   },
