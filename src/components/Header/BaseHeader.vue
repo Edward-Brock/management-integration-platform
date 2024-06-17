@@ -140,11 +140,23 @@ onMounted(async () => {
                     {{ userInfo.name ? userInfo.name : userInfo.username }}
                   </div>
 
-                  <!-- 显示当前登录的用户名 -->
-                  <div class="text-subtitle-1 text-grey-darken-1">{{ userInfo.username }}</div>
+                  <div class="d-flex flex-column">
+                    <!-- 显示当前登录的用户名 -->
+                    <span class="text-subtitle-1 text-grey-darken-1">{{ userInfo.username }}</span>
+                    <!-- 显示当前用户所含角色 -->
+                    <span class="d-flex flex-row mt-1">
+                      <v-chip
+                        v-for="role in userInfo.roles"
+                        :key="role.role.name"
+                        class="mr-1"
+                        size="x-small"
+                        >{{ role.role.name }}</v-chip
+                      >
+                    </span>
+                  </div>
                 </template>
                 <v-card-text>
-                  <div class="mx-auto mr-4">
+                  <div class="mx-auto">
                     <v-divider class="my-2"></v-divider>
                     <!-- 个人信息 -->
                     <v-btn

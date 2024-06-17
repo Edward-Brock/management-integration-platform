@@ -49,10 +49,7 @@ async function validate(e: any) {
 </script>
 
 <template>
-  <v-sheet
-    class="h-100 mx-auto d-flex flex-column justify-center align-center"
-    style="user-select: none"
-  >
+  <v-sheet class="h-100 mx-auto d-flex flex-column justify-center align-center">
     <h2 class="mb-8">{{ $t('login.register_mip_account') }}</h2>
     <v-form ref="form" @submit="validate">
       <v-text-field

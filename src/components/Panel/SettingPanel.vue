@@ -98,7 +98,6 @@ onMounted(() => {
 
 <style scoped>
 .right-sheet {
-  user-select: none;
   position: fixed;
   top: 0;
   right: 0;

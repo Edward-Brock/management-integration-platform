@@ -123,11 +123,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-sheet
-    class="h-100 w-75 pa-10 mt-4 mx-auto d-flex flex-column align-center"
-    rounded
-    style="user-select: none"
-  >
+  <v-sheet class="h-100 w-75 pa-10 mt-4 mx-auto d-flex flex-column align-center" rounded>
     <h2 class="mb-8">{{ $t('option.title') }}</h2>
     <v-form class="d-flex flex-column align-center" ref="form" @submit="validate">
       <v-textarea

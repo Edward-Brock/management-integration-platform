@@ -54,7 +54,7 @@ function previewAvatarChange(e: any) {
 </script>
 
 <template>
-  <v-dialog style="user-select: none" v-model="avatarDialog" max-width="600px">
+  <v-dialog v-model="avatarDialog" max-width="600px">
     <v-card :title="$t('user.upload_avatar')">
       <v-card-text class="d-flex flex-column justify-center align-center">
         <template class="mb-4 d-flex flex-column justify-center align-center">

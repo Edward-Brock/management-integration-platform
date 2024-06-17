@@ -45,13 +45,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-menu
-    style="user-select: none"
-    v-model="menu"
-    :close-on-content-click="false"
-    transition="scale-transition"
-    offset-y
-  >
+  <v-menu v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y>
     <template v-slot:activator="{ props }">
       <v-btn icon="mdi-translate" :ripple="false" v-bind="props"></v-btn>
     </template>
