@@ -55,6 +55,7 @@ export default {
     window: {
       cancel: '取消',
       ok: '好',
+      save: '保存',
       choose_avatar: '选择你的头像',
       upload: '上传',
       save_success: '保存成功'
@@ -72,17 +73,30 @@ export default {
       enUS: '英文'
     }
   },
-  option: {
-    title: '网站配置',
-    update_option: '更新网站配置',
-    field_required: '需要字段',
-    logo: '网站标识',
-    full_name: '网站全程',
-    simple_name: '网站简称',
-    status: '网站服务状态',
-    status_selects: {
-      active: '服务正常运行',
-      stop: '服务需要暂停服务'
+  manage: {
+    title: '网站管理',
+    config: {
+      title: '网站配置',
+      update_option: '更新网站配置',
+      field_required: '需要字段',
+      logo: '网站标识',
+      full_name: '网站全称',
+      simple_name: '网站简称',
+      status: '网站服务状态',
+      status_selects: {
+        active: '服务正常运行',
+        stop: '服务需要暂停服务'
+      }
+    },
+    user: {
+      title: '用户管理',
+      status: {
+        active: '活跃用户',
+        suspended: '停用用户',
+        locked: '锁定用户',
+        inactive: '删除用户',
+        total: '总用户数'
+      }
     }
   },
   // 展开 Vuetify 简体中文语言包所有项目

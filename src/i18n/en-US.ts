@@ -55,6 +55,7 @@ export default {
     window: {
       cancel: 'Cancel',
       ok: 'Ok',
+      save: 'Save',
       choose_avatar: 'Choose your avatar',
       upload: 'Upload',
       save_success: 'Save success'
@@ -72,17 +73,30 @@ export default {
       enUS: 'English'
     }
   },
-  option: {
-    title: 'Website Option',
-    update_option: 'Update Website Option',
-    field_required: 'Required Field',
-    logo: 'Website Logo',
-    full_name: 'Website Full Name',
-    simple_name: 'Website Simple Name',
-    status: 'Website Status',
-    status_selects: {
-      active: 'Service is running normally',
-      stop: 'Service needs to be suspended'
+  manage: {
+    title: 'Website Manage',
+    config: {
+      title: 'Website Option',
+      update_option: 'Update Website Option',
+      field_required: 'Required Field',
+      logo: 'Website Logo',
+      full_name: 'Website Full Name',
+      simple_name: 'Website Simple Name',
+      status: 'Website Status',
+      status_selects: {
+        active: 'Service is running normally',
+        stop: 'Service needs to be suspended'
+      }
+    },
+    user: {
+      title: 'User Manage',
+      status: {
+        active: 'ACTIVE',
+        suspended: 'SUSPENDED',
+        locked: 'LOCKED',
+        inactive: 'INACTIVE',
+        total: 'TOTAL USER'
+      }
     }
   },
   // 展开 Vuetify 英文语言包所有项目
