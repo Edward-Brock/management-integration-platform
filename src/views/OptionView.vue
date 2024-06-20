@@ -1,26 +1,14 @@
 <script setup lang="ts">
-import { inject, nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { inject, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getOptions, patchOptions } from '@/apis/options'
 import { useNotificationStore } from '@/stores/notificationStore'
 import { getCountTotalNumberUsers } from '@/apis/manage'
-import { getAllUsers } from '@/apis/users'
+import UserDataTable from '@/Tables/UserDataTable.vue'
 
 type TotalNumberUsers = {
   name: string
   number: number
-}
-
-type UserInfo = {
-  name: string
-  username: string
-  avatar: string
-  createdAt: string
-  email: string
-  id: string
-  mobile: string
-  status: string
-  updatedAt: string
 }
 
 type Option = {
@@ -34,11 +22,6 @@ const notificationStore = useNotificationStore()
 const reload: any = inject('reload')
 const tab = ref()
 
-/**
- * ==============================3
- * 用户管理
- * ==============================
- */
 const totalNumberUsers = ref<TotalNumberUsers[]>([
   { name: 'ACTIVE', number: 0 },
   { name: 'SUSPENDED', number: 0 },
@@ -64,91 +47,6 @@ async function fetchCountTotalNumberUsers() {
     console.error('Error fetching option info:', error)
   }
 }
-
-let userList: any = ref([])
-userList.value = await getAllUsers()
-userList.value.map((user: UserInfo) => {
-  if (user.avatar) user.avatar = import.meta.env.VITE_APP_BASE_URL + '/' + user.avatar
-})
-
-const dialog = ref(false)
-const dialogDelete = ref(false)
-const search = ref('')
-const headers = ref([
-  { key: 'id', title: 'ID' },
-  { key: 'name', title: 'NAME' },
-  { key: 'username', title: 'USERNAME' },
-  { key: 'email', title: 'EMAIL' },
-  { key: 'mobile', title: 'MOBILE' },
-  { key: 'avatar', title: 'AVATAR' },
-  { key: 'status', title: 'STATUS' },
-  { key: 'createdAt', title: 'CREATE TIME' },
-  { key: 'updatedAt', title: 'UPDATE TIME' },
-  { key: 'actions', title: 'Actions', sortable: false }
-])
-const desserts: any = ref([])
-const editedIndex = ref(-1)
-const editedItem = ref({
-  name: '',
-  username: '',
-  status: ''
-})
-const defaultItem = ref({
-  name: '',
-  username: '',
-  status: ''
-})
-
-function editItem(item: any) {
-  editedIndex.value = desserts.value.indexOf(item)
-  editedItem.value = Object.assign({}, item)
-  dialog.value = true
-  console.log(editedItem.value)
-}
-
-function deleteItem(item: any) {
-  editedIndex.value = desserts.value.indexOf(item)
-  editedItem.value = Object.assign({}, item)
-  dialogDelete.value = true
-}
-
-function deleteItemConfirm() {
-  desserts.value.splice(editedIndex.value, 1)
-  closeDelete()
-}
-
-function close() {
-  dialog.value = false
-  nextTick(() => {
-    editedItem.value = Object.assign({}, defaultItem.value)
-    editedIndex.value = -1
-  })
-}
-
-function closeDelete() {
-  dialogDelete.value = false
-  nextTick(() => {
-    editedItem.value = Object.assign({}, defaultItem.value)
-    editedIndex.value = -1
-  })
-}
-
-function save() {
-  if (editedIndex.value > -1) {
-    Object.assign(desserts.value[editedIndex.value], editedItem.value)
-  } else {
-    desserts.value.push(editedItem.value)
-  }
-  close()
-}
-
-watch(dialog, (val) => {
-  val || close()
-})
-
-watch(dialogDelete, (val) => {
-  val || closeDelete()
-})
 
 /**
  * ==============================
@@ -293,90 +191,7 @@ onMounted(() => {
               </v-card-text>
             </v-card>
           </v-sheet>
-
-          <v-card flat>
-            <template v-slot:text>
-              <v-text-field
-                v-model="search"
-                label="Search"
-                prepend-inner-icon="mdi-magnify"
-                variant="outlined"
-                hide-details
-                single-line
-              ></v-text-field>
-            </template>
-
-            <!-- 数据表格 -->
-            <v-data-table :headers="headers" :items="userList" :search="search">
-              <template v-slot:item.avatar="{ item }">
-                <v-card class="my-2" elevation="0">
-                  <v-img :src="item.avatar" height="64" cover></v-img>
-                </v-card>
-              </template>
-
-              <template v-slot:top>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
-                <v-dialog v-model="dialog" max-width="500px">
-                  <v-card title="修改项目">
-                    <v-card-text>
-                      <v-container>
-                        <v-row>
-                          <v-col cols="12" md="4" sm="6">
-                            <v-text-field v-model="editedItem.name" label="账户名称"></v-text-field>
-                          </v-col>
-                          <v-col cols="12" md="4" sm="6">
-                            <v-text-field v-model="editedItem.username" label="昵称"></v-text-field>
-                          </v-col>
-                          <v-col cols="12" md="4" sm="6">
-                            <v-select
-                              label="账号状态"
-                              v-model="editedItem.status"
-                              :items="['ACTIVE', 'SUSPENDED', 'LOCKED', 'INACTIVE']"
-                            ></v-select>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue-darken-1" variant="text" @click="close">{{
-                        $t('setting.window.cancel')
-                      }}</v-btn>
-                      <v-btn color="blue-darken-1" variant="text" @click="save">{{
-                        $t('setting.window.save')
-                      }}</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-                <v-dialog v-model="dialogDelete" max-width="500px">
-                  <v-card>
-                    <v-card-title class="text-h5"
-                      >Are you sure you want to delete this item?</v-card-title
-                    >
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue-darken-1" variant="text" @click="closeDelete">{{
-                        $t('setting.window.cancel')
-                      }}</v-btn>
-                      <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm">{{
-                        $t('setting.window.ok')
-                      }}</v-btn>
-                      <v-spacer></v-spacer>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </template>
-              <template v-slot:item.actions="{ item }">
-                <v-icon class="me-2" size="small" @click="editItem(item)"> mdi-pencil </v-icon>
-                <v-icon size="small" @click="deleteItem(item)"> mdi-delete </v-icon>
-              </template>
-              <template v-slot:no-data>
-                <v-btn color="primary" @click="userList.value = getAllUsers()">Reset</v-btn>
-              </template>
-            </v-data-table>
-          </v-card>
+          <UserDataTable />
         </v-tabs-window-item>
         <!-- 网站配置 -->
         <v-tabs-window-item :value="t('manage.config.title')">

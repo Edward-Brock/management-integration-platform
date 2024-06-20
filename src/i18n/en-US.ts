@@ -96,9 +96,9 @@ export default {
         locked: 'LOCKED',
         inactive: 'INACTIVE',
         total: 'TOTAL USER'
-      }
+      },
+      new_item: 'Add user',
+      edit_item: 'Edit user'
     }
-  },
-  // 展开 Vuetify 英文语言包所有项目
-  ...en
+  }
 }

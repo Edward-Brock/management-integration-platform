@@ -55,3 +55,11 @@ export function changeUserAvatar(avatar: File) {
 export function getAllUsers() {
   return request('GET', 'users/')
 }
+
+/**
+ * 删除用户
+ * @param id 用户 ID
+ */
+export function deleteUser(id: string) {
+  return request('DELETE', 'users/' + id)
+}

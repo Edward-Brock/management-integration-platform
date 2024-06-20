@@ -1,14 +1,33 @@
 import { createI18n } from 'vue-i18n'
 import zhCN from '@/i18n/zh-CN'
 import enUS from '@/i18n/en-US'
+import { en, zhHans } from 'vuetify/locale'
 
 interface Options {
   language?: string
 }
 
 const message = {
-  'zh-CN': zhCN,
-  'en-US': enUS
+  'zh-CN': {
+    ...zhCN,
+    $vuetify: {
+      ...zhHans,
+      dataIterator: {
+        rowsPerPageText: 'Items per page:',
+        pageText: '{0}-{1} of {2}'
+      }
+    }
+  },
+  'en-US': {
+    ...enUS,
+    $vuetify: {
+      ...en,
+      dataIterator: {
+        rowsPerPageText: 'Items per page:',
+        pageText: '{0}-{1} of {2}'
+      }
+    }
+  }
 }
 
 // 获取本地存储的 option 并转为 JSON 格式，如果获取不到则返回一个空对象

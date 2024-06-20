@@ -96,9 +96,9 @@ export default {
         locked: '锁定用户',
         inactive: '删除用户',
         total: '总用户数'
-      }
+      },
+      new_item: '新增用户',
+      edit_item: '修改用户'
     }
-  },
-  // 展开 Vuetify 简体中文语言包所有项目
-  ...zhHans
+  }
 }
