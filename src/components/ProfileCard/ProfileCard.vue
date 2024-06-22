@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/userStore'
 import { useI18n } from 'vue-i18n'
+import { getCosObjectUrl } from '@/utils/cos'
+import { ref } from 'vue'
 
 const { t } = useI18n()
 
@@ -26,17 +28,23 @@ function getGreetingByTime(date: Date): string {
 
 const currentDate = new Date()
 const greetingByTime = getGreetingByTime(currentDate)
-
+const userAvatar = ref('')
 const userInfo = useUserStore().authInfo
-const baseUrl = import.meta.env.VITE_APP_BASE_URL
-const avatarUrl = userInfo.avatar.startsWith(baseUrl)
-  ? userInfo.avatar
-  : `${baseUrl}/${userInfo.avatar}`
+
+getCosObjectUrl(userInfo.avatar)
+  .then((url) => {
+    if (typeof url === 'string') {
+      userAvatar.value = url
+    }
+  })
+  .catch((error) => {
+    console.error('Error getting object URL:', error)
+  })
 </script>
 
 <template>
   <v-card width="320" height="320" elevation="0" class="pa-6 d-flex flex-column justify-end">
-    <v-avatar class="mb-4" size="96" :image="avatarUrl"></v-avatar>
+    <v-avatar class="mb-4" size="96" :image="userAvatar"></v-avatar>
 
     <h2 class="mb-1 font-weight-black text-h4">
       {{ userInfo.name ? userInfo.name : userInfo.username }}

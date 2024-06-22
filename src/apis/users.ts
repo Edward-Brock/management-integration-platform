@@ -53,7 +53,7 @@ export function changeUserAvatar(avatar: File) {
  * 获取全部用户
  */
 export function getAllUsers() {
-  return request('GET', 'users/')
+  return request('GET', 'roles/details')
 }
 
 /**

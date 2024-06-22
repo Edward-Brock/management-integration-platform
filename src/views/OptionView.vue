@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { getOptions, patchOptions } from '@/apis/options'
 import { useNotificationStore } from '@/stores/notificationStore'
 import { getCountTotalNumberUsers } from '@/apis/manage'
-import UserDataTable from '@/Tables/UserDataTable.vue'
+import UserDataTable from '@/components/Tables/UserDataTable.vue'
 
 type TotalNumberUsers = {
   name: string

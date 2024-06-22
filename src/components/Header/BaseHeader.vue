@@ -5,6 +5,7 @@ import router from '@/router'
 import { useUserStore } from '@/stores/userStore'
 import SettingsPanel from '@/components/Panel/SettingPanel.vue'
 import LanguageSwitcher from '@/components/Language/LanguageSwitcher.vue'
+import { getCosObjectUrl } from '@/utils/cos'
 
 interface Option {
   name: string
@@ -34,7 +35,6 @@ interface UserInfo {
 
 // 从 Layout 中读取 hideContent 判断是否需要隐藏部分组件
 const props = defineProps(['hideContent'])
-const baseUrl = import.meta.env.VITE_APP_BASE_URL
 
 // 网站配置内容
 const service = reactive({
@@ -45,6 +45,7 @@ const service = reactive({
 })
 
 const userInfo = ref({} as UserInfo)
+const userAvatar = ref('')
 
 // 计算属性检查用户是否拥有 ADMIN 权限
 const isAdmin = computed(() => {
@@ -79,11 +80,17 @@ onMounted(async () => {
   // 获取当前登录用户信息
   const userStore = useUserStore()
   userInfo.value = {
-    ...userStore.authInfo,
-    avatar: userStore.authInfo.avatar.startsWith(baseUrl)
-      ? userStore.authInfo.avatar
-      : `${baseUrl}/${userStore.authInfo.avatar}`
+    ...userStore.authInfo
   }
+  getCosObjectUrl(userInfo.value.avatar)
+    .then((url) => {
+      if (typeof url === 'string') {
+        userAvatar.value = url
+      }
+    })
+    .catch((error) => {
+      console.error('Error getting object URL:', error)
+    })
 })
 </script>
 
@@ -126,12 +133,12 @@ onMounted(async () => {
             <v-menu min-width="250px" rounded>
               <template v-slot:activator="{ props }">
                 <v-btn class="ml-2" size="48" icon="" v-bind="props" :ripple="false">
-                  <v-avatar size="36" :image="userInfo.avatar"></v-avatar>
+                  <v-avatar size="36" :image="userAvatar"></v-avatar>
                 </v-btn>
               </template>
               <v-card class="mt-4" min-width="300" max-width="400" elevation="2">
                 <template v-slot:prepend>
-                  <v-avatar class="mr-2" size="48" :image="userInfo.avatar"></v-avatar>
+                  <v-avatar class="mr-2" size="48" :image="userAvatar"></v-avatar>
                 </template>
 
                 <template v-slot:title>

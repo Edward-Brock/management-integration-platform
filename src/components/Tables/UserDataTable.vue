@@ -3,6 +3,7 @@ import { computed, inject, nextTick, ref, watch } from 'vue'
 import { deleteUser, getAllUsers, patchUserProfile } from '@/apis/users'
 import { useI18n } from 'vue-i18n'
 import { useNotificationStore } from '@/stores/notificationStore'
+import { getCosObjectUrl } from '@/utils/cos'
 
 type UserInfo = {
   id: string
@@ -23,7 +24,15 @@ const reload: any = inject('reload')
 let userList: any = ref([])
 userList.value = await getAllUsers()
 userList.value.map((user: UserInfo) => {
-  if (user.avatar) user.avatar = import.meta.env.VITE_APP_BASE_URL + '/' + user.avatar
+  getCosObjectUrl(user.avatar)
+    .then((url) => {
+      if (typeof url === 'string') {
+        user.avatar = url
+      }
+    })
+    .catch((error) => {
+      console.error('Error getting object URL:', error)
+    })
 })
 
 const dialog = ref(false)
@@ -37,6 +46,7 @@ const headers = ref([
   { key: 'email', title: 'EMAIL' },
   { key: 'mobile', title: 'MOBILE' },
   { key: 'avatar', title: 'AVATAR', sortable: false },
+  { key: 'roles', title: 'ROLES' },
   { key: 'status', title: 'STATUS' },
   { key: 'createdAt', title: 'CREATE TIME' },
   { key: 'updatedAt', title: 'UPDATE TIME' },
@@ -55,7 +65,8 @@ const defaultItem: any = ref({
   username: '',
   email: '',
   mobile: '',
-  status: ''
+  status: '',
+  role: []
 })
 
 const formTitle = computed(() => {
@@ -152,6 +163,10 @@ watch(dialogDelete, (val) => {
         </v-card>
       </template>
 
+      <template v-slot:item.roles="{ item }">
+        <span>{{ item.roles.map((role: any) => role.role.name).join(' ') }}</span>
+      </template>
+
       <template v-slot:top>
         <v-dialog v-model="dialog" max-width="500px">
           <v-card :title="formTitle">
@@ -212,7 +227,7 @@ watch(dialogDelete, (val) => {
         <v-icon size="small" @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
       <template v-slot:no-data>
-        <v-btn color="primary" @click="userList.value = getAllUsers()">Reset</v-btn>
+        <v-btn color="primary" @click="search = ''">Reset</v-btn>
       </template>
     </v-data-table>
   </v-card>

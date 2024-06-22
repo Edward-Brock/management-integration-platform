@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/userStore'
 import { patchUserProfile } from '@/apis/users'
 import AvatarUpload from '@/components/ProfileCard/AvatarUpload.vue'
+import { getCosObjectUrl } from '@/utils/cos'
 
 const { t } = useI18n()
 const userStore = useUserStore()
@@ -17,6 +18,7 @@ const userInfo = reactive({
   email: '',
   mobile: ''
 })
+const userAvatar = ref('')
 
 const _userInfo = reactive({ ...userInfo })
 
@@ -57,7 +59,15 @@ async function fetchUserInfo() {
     const data = userStore.authInfo
     Object.assign(_userInfo, data)
     Object.assign(userInfo, data)
-    userInfo.avatar = `${import.meta.env.VITE_APP_BASE_URL}/${userStore.authInfo.avatar}`
+    getCosObjectUrl(data.avatar)
+      .then((url) => {
+        if (typeof url === 'string') {
+          userAvatar.value = url
+        }
+      })
+      .catch((error) => {
+        console.error('Error getting object URL:', error)
+      })
   } catch (error) {
     console.error('Error fetching user info:', error)
   }
@@ -106,7 +116,7 @@ onMounted(() => {
         <template v-slot:activator="{ props }">
           <v-avatar
             v-bind="props"
-            :image="userInfo.avatar"
+            :image="userAvatar"
             size="128"
             @click="avatarDialog = true"
           ></v-avatar>

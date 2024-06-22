@@ -1,6 +1,6 @@
 {
   "name": "management-integration-platform",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "MIP 将多种功能进行集合，达到一处使用多端融合",
   "author": "Edward Brock",
   "private": true,
@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "cos-js-sdk-v5": "^1.8.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "vite-plugin-vuetify": "^2.0.3",
