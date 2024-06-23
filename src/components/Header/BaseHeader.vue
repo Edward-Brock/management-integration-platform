@@ -136,7 +136,7 @@ onMounted(async () => {
                   <v-avatar size="36" :image="userAvatar"></v-avatar>
                 </v-btn>
               </template>
-              <v-card class="mt-4" min-width="300" max-width="400" elevation="2">
+              <v-card class="mt-2" min-width="300" max-width="400" elevation="2">
                 <template v-slot:prepend>
                   <v-avatar class="mr-2" size="48" :image="userAvatar"></v-avatar>
                 </template>

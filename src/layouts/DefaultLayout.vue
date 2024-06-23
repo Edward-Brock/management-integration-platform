@@ -4,9 +4,9 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <v-app>
+  <v-app class="bg-grey-lighten-5">
     <!-- Header -->
-    <v-app-bar class="px-4" :elevation="0">
+    <v-app-bar class="px-4 header_bg" :elevation="0">
       <BaseHeader :hideContent="false" />
     </v-app-bar>
     <!-- main -->
@@ -16,4 +16,10 @@ import { RouterView } from 'vue-router'
   </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+.header_bg {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(25px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+</style>

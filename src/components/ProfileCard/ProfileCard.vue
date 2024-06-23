@@ -49,7 +49,7 @@ getCosObjectUrl(userInfo.avatar)
     <h2 class="mb-1 font-weight-black text-h4">
       {{ userInfo.name ? userInfo.name : userInfo.username }}
     </h2>
-    <div class="text-subtitle-1 text-grey-darken-1">{{ greetingByTime }}</div>
+    <div class="text-h6 text-grey-darken-1">{{ greetingByTime }}</div>
   </v-card>
 </template>
 
