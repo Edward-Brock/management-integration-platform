@@ -144,7 +144,7 @@ async function updateOptionInfo() {
         await Promise.all(updatePromises)
         // 保存成功提示
         notificationStore.addNotification({
-          message: t('setting.window.save_success'),
+          message: t('general.window.save_success'),
           type: 'success'
         })
         // 刷新页面
@@ -163,7 +163,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-card class="px-4 mt-4" elevation="0">
+  <v-card class="px-4 pt-4" elevation="0">
     <div class="text-h5 mb-4">{{ $t('manage.title') }}</div>
     <v-tabs v-model="tab">
       <v-tab :value="t('manage.user.title')">{{ $t('manage.user.title') }}</v-tab>
@@ -195,7 +195,7 @@ onMounted(() => {
         </v-tabs-window-item>
         <!-- 网站配置 -->
         <v-tabs-window-item :value="t('manage.config.title')">
-          <v-sheet class="h-100 w-75 pa-10 mt-4 mx-auto d-flex flex-column align-center">
+          <v-sheet class="h-100 pa-10 mt-4 mx-auto d-flex flex-column align-center">
             <v-form class="d-flex flex-column align-center" ref="form" @submit="validate">
               <v-textarea
                 class="mt-8"

@@ -1,11 +1,18 @@
-import { en } from 'vuetify/locale'
-
 export default {
   general: {
     dashboard: 'Dashboard',
     about: 'About',
     settings_panel: 'Settings Panel',
-    current_release: 'Current release'
+    current_release: 'Current release',
+    window: {
+      cancel: 'Cancel',
+      ok: 'Ok',
+      save: 'Save',
+      delete: 'Delete',
+      upload: 'Upload',
+      save_success: 'Save success',
+      delete_success: 'Delete success'
+    }
   },
   login: {
     register_account: 'Register account',
@@ -38,6 +45,7 @@ export default {
     email: 'Email',
     mobile: 'Mobile',
     upload_avatar: 'Upload Avatar',
+    choose_avatar: 'Choose your avatar',
     preview_avatar: 'Preview Avatar',
     change_avatar: 'Click to change avatar',
     website_option: 'Website Option'
@@ -51,15 +59,13 @@ export default {
     night: 'Good evening',
     lateNight: 'Good late at night'
   },
+  timeline: {
+    placeholder: 'What do you want to record?',
+    submit: 'Record',
+    review: 'Review',
+    timelineRequired: 'Timeline content needs to be filled in'
+  },
   setting: {
-    window: {
-      cancel: 'Cancel',
-      ok: 'Ok',
-      save: 'Save',
-      choose_avatar: 'Choose your avatar',
-      upload: 'Upload',
-      save_success: 'Save success'
-    },
     theme: {
       title: 'Theme',
       subtitle: 'Customize the current website using a light or dark theme',

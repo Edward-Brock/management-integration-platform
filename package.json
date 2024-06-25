@@ -1,6 +1,6 @@
 {
   "name": "management-integration-platform",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "MIP 将多种功能进行集合，达到一处使用多端融合",
   "author": "Edward Brock",
   "private": true,

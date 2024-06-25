@@ -27,7 +27,7 @@ async function uploadFile() {
 
     // 4. 全局通知保存成功
     notificationStore.addNotification({
-      message: t('setting.window.save_success'),
+      message: t('general.window.save_success'),
       type: 'success'
     })
     // 5. 刷新保存持久化用户信息数据
@@ -66,7 +66,7 @@ function previewAvatarChange(e: any) {
           class="w-100"
           v-model="file"
           accept=".png,.jpeg,.gif,.webp"
-          :label="t('setting.window.choose_avatar')"
+          :label="t('user.choose_avatar')"
           @change="previewAvatarChange"
           show-size
           outlined
@@ -74,7 +74,7 @@ function previewAvatarChange(e: any) {
         ></v-file-input>
       </v-card-text>
       <v-card-actions>
-        <v-btn @click="uploadFile">{{ $t('setting.window.upload') }}</v-btn>
+        <v-btn @click="uploadFile">{{ $t('general.window.upload') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

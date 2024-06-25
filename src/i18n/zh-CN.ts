@@ -1,11 +1,18 @@
-import { zhHans } from 'vuetify/locale'
-
 export default {
   general: {
     dashboard: '仪表盘',
     about: '关于',
     settings_panel: '设置面板',
-    current_release: '当前版本'
+    current_release: '当前版本',
+    window: {
+      cancel: '取消',
+      ok: '好',
+      save: '保存',
+      delete: '删除',
+      upload: '上传',
+      save_success: '保存成功',
+      delete_success: '删除成功'
+    }
   },
   login: {
     register_account: '注册账户',
@@ -38,6 +45,7 @@ export default {
     email: '电子邮箱',
     mobile: '手机号码',
     upload_avatar: '上传头像',
+    choose_avatar: '选择你的头像',
     preview_avatar: '预览头像',
     change_avatar: '点击更改头像',
     website_option: '网站配置'
@@ -51,15 +59,13 @@ export default {
     night: '晚上好',
     lateNight: '深夜好'
   },
+  timeline: {
+    placeholder: '你想记录些什么？',
+    submit: '记录',
+    review: '回顾',
+    timelineRequired: '需要填写时间线内容'
+  },
   setting: {
-    window: {
-      cancel: '取消',
-      ok: '好',
-      save: '保存',
-      choose_avatar: '选择你的头像',
-      upload: '上传',
-      save_success: '保存成功'
-    },
     theme: {
       title: '主题',
       subtitle: '自定义当前网站使用明亮或黑暗主题',

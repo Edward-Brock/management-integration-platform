@@ -199,10 +199,10 @@ watch(dialogDelete, (val) => {
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue-darken-1" variant="text" @click="close">{{
-                $t('setting.window.cancel')
+                $t('general.window.cancel')
               }}</v-btn>
               <v-btn color="blue-darken-1" variant="text" @click="save">{{
-                $t('setting.window.save')
+                $t('general.window.save')
               }}</v-btn>
             </v-card-actions>
           </v-card>
@@ -212,10 +212,10 @@ watch(dialogDelete, (val) => {
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue-darken-1" variant="text" @click="closeDelete">{{
-                $t('setting.window.cancel')
+                $t('general.window.cancel')
               }}</v-btn>
               <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm">{{
-                $t('setting.window.ok')
+                $t('general.window.ok')
               }}</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
