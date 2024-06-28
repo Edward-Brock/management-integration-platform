@@ -195,53 +195,49 @@ onMounted(() => {
         </v-tabs-window-item>
         <!-- 网站配置 -->
         <v-tabs-window-item :value="t('manage.config.title')">
-          <v-sheet class="h-100 pa-10 mt-4 mx-auto d-flex flex-column align-center">
-            <v-form class="d-flex flex-column align-center" ref="form" @submit="validate">
+          <v-sheet class="h-100 my-4 mx-auto d-flex flex-column align-center">
+            <v-form class="w-100 d-flex flex-column align-center" ref="form" @submit="validate">
               <v-textarea
-                class="mt-8"
+                class="mt-8 w-100 w-md-50"
                 v-model="optionInfo.service_logo"
                 :rules="EmptyRules"
                 :label="$t('manage.config.logo')"
                 variant="outlined"
-                width="360"
                 rows="2"
                 auto-grow
                 required
               ></v-textarea>
 
               <v-text-field
-                class="mt-2"
+                class="mt-2 w-100 w-md-50"
                 v-model="optionInfo.service_name_full"
                 :rules="EmptyRules"
                 :label="$t('manage.config.full_name')"
                 variant="outlined"
-                width="360"
               ></v-text-field>
 
               <v-text-field
-                class="mt-2"
+                class="mt-2 w-100 w-md-50"
                 v-model="optionInfo.service_name_simple"
                 :rules="EmptyRules"
                 :label="$t('manage.config.simple_name')"
                 variant="outlined"
-                width="360"
               ></v-text-field>
 
               <v-select
-                class="mt-2"
+                class="mt-2 w-100 w-md-50"
                 :items="statusSelects"
                 item-title="name"
                 :label="$t('manage.config.status')"
                 v-model="optionInfo.service_status"
                 variant="outlined"
-                width="360"
               >
                 <template v-slot:item="{ props, item }">
                   <v-list-item v-bind="props" :subtitle="item.raw.department"></v-list-item>
                 </template>
               </v-select>
 
-              <div class="w-100 d-flex flex-column">
+              <div class="w-100 w-md-50 d-flex flex-column">
                 <v-btn type="submit" class="mt-4" variant="tonal" size="large" block
                   >{{ $t('manage.config.update_option') }}
                 </v-btn>

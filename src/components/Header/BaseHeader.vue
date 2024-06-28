@@ -82,15 +82,19 @@ onMounted(async () => {
   userInfo.value = {
     ...userStore.authInfo
   }
-  getCosObjectUrl(userInfo.value.avatar)
-    .then((url) => {
-      if (typeof url === 'string') {
-        userAvatar.value = url
-      }
-    })
-    .catch((error) => {
-      console.error('Error getting object URL:', error)
-    })
+
+  // 判断 userInfo.value.avatar 是否为空，有值则获取 COS 内路径
+  if (userInfo.value.avatar) {
+    getCosObjectUrl(userInfo.value.avatar)
+      .then((url) => {
+        if (typeof url === 'string') {
+          userAvatar.value = url
+        }
+      })
+      .catch((error) => {
+        console.error('Error getting object URL:', error)
+      })
+  }
 })
 </script>
 
@@ -133,7 +137,7 @@ onMounted(async () => {
             <v-menu min-width="250px" rounded>
               <template v-slot:activator="{ props }">
                 <v-btn class="ml-2" size="48" icon="" v-bind="props" :ripple="false">
-                  <v-avatar size="36" :image="userAvatar"></v-avatar>
+                  <v-avatar size="36" v-if="userAvatar" :image="userAvatar"></v-avatar>
                 </v-btn>
               </template>
               <v-card class="mt-2" min-width="300" max-width="400" elevation="2">

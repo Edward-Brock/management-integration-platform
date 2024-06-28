@@ -159,7 +159,7 @@ watch(dialogDelete, (val) => {
     <v-data-table :headers="headers" :items="userList" v-model:search="search" items-per-page="10">
       <template v-slot:item.avatar="{ item }">
         <v-card class="my-2" elevation="0">
-          <v-img :src="item.avatar" height="64" cover></v-img>
+          <v-img class="rounded-circle" :src="item.avatar" height="64" width="64" cover></v-img>
         </v-card>
       </template>
 
